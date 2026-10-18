@@ -62,18 +62,20 @@ body.is-playing .cover{animation:cb 5s ease-in-out infinite}
 .section-heading::before,.section-heading::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
 
 /* 🎰 СТИЛИ ДЛЯ СЛОТ-МАШИНЫ (РУЛЕТКИ) НА ГЛАВНОЙ */
-.slot-machine-box{position:relative;margin-top:22px;padding:18px 14px 16px;border-radius:26px;background:radial-gradient(circle at 50% 0%,rgba(244,156,187,.2),transparent 65%),linear-gradient(160deg,rgba(36,28,50,.92),rgba(19,16,28,.96));border:1px solid rgba(244,156,187,.28);box-shadow:0 16px 38px rgba(0,0,0,.48);text-align:center}
+.slot-machine-box{position:relative;margin-top:24px;padding:18px 14px 16px;border-radius:26px;background:radial-gradient(circle at 50% 0%,rgba(244,156,187,.2),transparent 65%),linear-gradient(160deg,rgba(36,28,50,.92),rgba(19,16,28,.96));border:1px solid rgba(244,156,187,.28);box-shadow:0 16px 38px rgba(0,0,0,.48);text-align:center}
 .slot-machine-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 4px}
 .slot-machine-badge{font-size:10.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--warm);display:flex;align-items:center;gap:6px}
 .slot-machine-sub{font-size:11px;color:var(--muted)}
 .slot-reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;padding:10px;border-radius:20px;background:rgba(10,8,15,.65);border:1px inset rgba(255,255,255,.08);box-shadow:inset 0 6px 16px rgba(0,0,0,.6)}
 .slot-reel-window{aspect-ratio:1;border-radius:14px;overflow:hidden;position:relative;border:1.5px solid rgba(255,255,255,.12);background:#1d1726;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s}
-.slot-reel-window.winner{border-color:var(--pink);box-shadow:0 0 16px rgba(244,156,187,.35);animation:slotPop .4s cubic-bezier(.34,1.56,.64,1)}
+.slot-reel-window:active{transform:scale(.94)}
+.slot-reel-window.winner{border-color:rgba(244,156,187,.55);box-shadow:0 0 14px rgba(244,156,187,.25);animation:slotPop .4s cubic-bezier(.34,1.56,.64,1)}
+.slot-reel-window.playing-now{border-color:var(--pink);box-shadow:0 0 18px rgba(244,156,187,.55)}
 @keyframes slotPop{0%{transform:scale(.88)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
 .slot-reel-card{width:100%;height:100%;display:grid;place-items:center;font-size:28px;color:#fff;position:relative}
 .slot-reel-card.spinning{animation:reelSpin .12s linear infinite;filter:blur(2px) brightness(1.15)}
 @keyframes reelSpin{0%{transform:translateY(-18%) scale(.95)}50%{transform:translateY(18%) scale(1.05)}100%{transform:translateY(-18%) scale(.95)}}
-.slot-reel-overlay{position:absolute;inset:auto 0 0 0;padding:18px 6px 6px;background:linear-gradient(to top,rgba(10,8,15,.95),transparent);font-size:10px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slot-reel-overlay{position:absolute;inset:auto 0 0 0;padding:20px 6px 6px;background:linear-gradient(to top,rgba(10,8,15,.95),transparent);font-size:10.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .slot-actions-row{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}
 .slot-spin-btn{height:44px;border-radius:22px;border:none;background:linear-gradient(135deg,var(--pink),var(--purple),var(--warm));background-size:200% 200%;color:#16121d;font-size:13.5px;font-weight:800;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 8px 22px rgba(244,156,187,.35);transition:transform .2s,box-shadow .2s}
 .slot-spin-btn:hover{box-shadow:0 10px 26px rgba(244,156,187,.5)}
@@ -283,11 +285,11 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
     </section>
     <div class="hint">Свайп влево / вправо — переключить трек<br>Двойной тап по обложке — поставить / убрать лайк</div>
     
-    <!-- 🎰 Интерактивная «Рулетка» (Слот-машина) на Главном экране -->
+    <!-- 🎰 Только Интерактивная «Рулетка» (Слот-машина) на Главном экране -->
     <div class="slot-machine-box">
       <div class="slot-machine-header">
         <span class="slot-machine-badge">🎰 Музыкальная рулетка</span>
-        <span class="slot-machine-sub">3 случайных трека</span>
+        <span class="slot-machine-sub">Тапни по слоту, чтобы включить</span>
       </div>
       <div class="slot-reels-grid" id="slotReelsGrid">
         <div class="slot-reel-window" id="slotReel0"><div class="slot-reel-card">♫</div></div>
@@ -299,9 +301,6 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
         <button type="button" class="slot-play-all-btn" id="playSlotJackpotBtn">▶ Слушать микс</button>
       </div>
     </div>
-
-    <div class="section-heading">ВЫПАВШИЕ ТРЕКИ</div>
-    <section class="playlist" id="playlist"></section>
   </div>
 
   <div class="tab-view" id="viewSearch">
@@ -695,6 +694,15 @@ function refreshUI() {
     const pb = r.querySelector(".track-play"); if (pb) pb.textContent = isCur && playing ? "Ⅱ" : "▶";
   });
 
+  // Подсветка активного барабана в рулетке, если играет его трек
+  [0, 1, 2].forEach(rIdx => {
+    const win = $(`slotReel${rIdx}`);
+    if (win) {
+      const isCurReel = currentSlotIndices[rIdx] === currentIndex && playing;
+      win.classList.toggle("playing-now", isCurReel);
+    }
+  });
+
   document.querySelectorAll(".album-tile[data-album-id]").forEach(tile => {
     const aid = tile.dataset.albumId;
     tile.querySelector(".album-tile-shuffle")?.classList.toggle("active", shuffleEnabled && activeQueueSource === "album" && activeQueueAlbum === aid);
@@ -1046,7 +1054,7 @@ function setLikesSubTab(sub, animate = true) {
   }
 }
 
-// 🎰 ЛОГИКА СЛОТ-МАШИНЫ (РУЛЕТКИ) НА ГЛАВНОЙ
+// 🎰 ЛОГИКА СЛОТ-МАШИНЫ (РУЛЕТКИ) НА ГЛАВНОЙ (без лишнего списка снизу)
 let isSlotSpinning = false;
 
 function fillReelWindow(reelIndex, trackIdx, isSpinning = false, isWinner = false) {
@@ -1072,19 +1080,6 @@ function fillReelWindow(reelIndex, trackIdx, isSpinning = false, isWinner = fals
   };
 }
 
-function renderSlotResultsList() {
-  const pl = $("playlist");
-  pl.innerHTML = "";
-  if (!tracks.length) {
-    pl.innerHTML = `<div style="text-align:center; color:var(--muted); padding: 20px;">Пока нет треков. Загрузите их через Telegram-бота!</div>`;
-    return;
-  }
-  currentSlotIndices.forEach((idx, num) => {
-    const row = createTrackRowElement(tracks[idx], idx, num + 1, "slot");
-    pl.appendChild(row);
-  });
-}
-
 function spinSlotMachine(animate = true) {
   if (!tracks.length || isSlotSpinning) return;
   const allIndices = tracks.map((_, i) => i);
@@ -1096,7 +1091,7 @@ function spinSlotMachine(animate = true) {
   if (!animate) {
     currentSlotIndices = picks;
     picks.forEach((tIdx, rIdx) => fillReelWindow(rIdx, tIdx, false, false));
-    renderSlotResultsList();
+    refreshUI();
     return;
   }
 
@@ -1106,7 +1101,7 @@ function spinSlotMachine(animate = true) {
   btn.textContent = "🎰 Крутим...";
 
   const timers = [0, 1, 2].map(rIdx => {
-    $(`slotReel${rIdx}`)?.classList.remove("winner");
+    $(`slotReel${rIdx}`)?.classList.remove("winner", "playing-now");
     return setInterval(() => {
       const randIdx = Math.floor(Math.random() * tracks.length);
       fillReelWindow(rIdx, randIdx, true, false);
@@ -1119,10 +1114,10 @@ function spinSlotMachine(animate = true) {
       fillReelWindow(rIdx, picks[rIdx], false, true);
       if (rIdx === 2) {
         currentSlotIndices = picks;
-        renderSlotResultsList();
         isSlotSpinning = false;
         btn.disabled = false;
         btn.textContent = "🎰 Крутить ещё раз!";
+        refreshUI();
       }
     }, stopTime);
   });
