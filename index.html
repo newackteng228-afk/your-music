@@ -25,12 +25,19 @@ body.is-playing .ambient-glow{opacity:1;animation:af 7s ease-in-out infinite alt
 .slide-out-right{animation:tor .16s ease-in forwards!important}.slide-in-left{animation:til .24s cubic-bezier(.22,1,.36,1) forwards!important}
 @keyframes tol{to{opacity:0;transform:translateX(-34px) scale(.96)}}@keyframes tir{from{opacity:0;transform:translateX(34px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes tor{to{opacity:0;transform:translateX(34px) scale(.96)}}@keyframes til{from{opacity:0;transform:translateX(-34px) scale(.96)}to{opacity:1;transform:none}}
+
+/* Анимации переключения подвкладок Треки <-> Альбомы */
+.sub-slide-right{animation:ssr .34s cubic-bezier(.22,1,.36,1) forwards}
+.sub-slide-left{animation:ssl .34s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes ssr{0%{opacity:0;transform:translateX(26px) scale(.98)}100%{opacity:1;transform:none}}
+@keyframes ssl{0%{opacity:0;transform:translateX(-26px) scale(.98)}100%{opacity:1;transform:none}}
+
 .now-playing{text-align:center;touch-action:pan-y;user-select:none}
 .artists{min-height:22px;margin-bottom:14px;color:#dfd4ec;font-size:15px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;display:inline-block;transition:.2s}.artists:hover{color:var(--pink)}.artists:active{transform:scale(.95)}
 .cover-wrapper{position:relative;width:min(74vw,290px);aspect-ratio:1;margin:0 auto;cursor:pointer;user-select:none}
 .cover{width:100%;height:100%;overflow:hidden;border-radius:26px;background:linear-gradient(135deg,#32263f,#6e4e77,#c27ba0);box-shadow:0 18px 45px rgba(0,0,0,.45);display:grid;place-items:center;position:relative;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .5s}
 .cover.pulse-like{transform:scale(.94)!important}
-.cover img,.track-cover img,.mini-cover-card img,.artist-avatar img,.stack-item img,.mini-player-cover img,.artist-modal-ava img,.album-tile-cover img,.album-detail-cover img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cover img,.track-cover img,.mini-cover-card img,.artist-avatar img,.stack-item img,.mini-player-cover img,.artist-modal-ava img,.album-tile-cover img,.album-detail-cover img,.profile-avatar-large img,.spotlight-cover img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .cover-fallback{font-size:64px;color:rgba(255,255,255,.75);display:none}
 body.is-playing .cover{animation:cb 5s ease-in-out infinite}
 @keyframes cb{0%,100%{transform:translateY(0) scale(1);box-shadow:0 18px 45px rgba(0,0,0,.45),0 0 25px rgba(244,156,187,.15)}50%{transform:translateY(-5px) scale(1.015);box-shadow:0 24px 55px rgba(0,0,0,.55),0 0 38px rgba(179,146,240,.3)}}
@@ -59,6 +66,28 @@ body.is-playing .cover{animation:cb 5s ease-in-out infinite}
 .hint{margin-top:22px;color:#7c718a;font-size:11.5px;text-align:center;letter-spacing:.3px;line-height:1.5}
 .section-heading{display:flex;align-items:center;gap:12px;margin:24px 0 14px;color:#b5a4c7;font-size:11px;font-weight:700;letter-spacing:2px;text-align:center;white-space:nowrap;text-transform:uppercase}
 .section-heading::before,.section-heading::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
+
+/* Обновленная шапка секции на главной с кнопкой обновления микса */
+.home-mix-header{display:flex;align-items:center;justify-content:space-between;margin:24px 0 12px}
+.home-mix-title{color:#b5a4c7;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.home-mix-refresh{border:1px solid rgba(244,156,187,.25);background:rgba(244,156,187,.08);color:var(--pink);border-radius:14px;padding:5px 11px;font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:.2s}
+.home-mix-refresh:hover{background:rgba(244,156,187,.18);border-color:var(--pink)}
+.home-mix-refresh:active{transform:scale(.93)}
+.home-mix-refresh.spin svg{animation:spinOnce .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes spinOnce{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Карточка «Находка дня» на Главной */
+.spotlight-card{position:relative;overflow:hidden;border-radius:22px;padding:14px;margin-bottom:12px;background:radial-gradient(circle at 90% 10%,rgba(244,156,187,.22),transparent 60%),linear-gradient(135deg,rgba(42,33,56,.9),rgba(24,20,34,.95));border:1px solid rgba(244,156,187,.28);display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 12px 28px rgba(0,0,0,.35);transition:.25s}
+.spotlight-card:hover{border-color:rgba(244,156,187,.5);transform:translateY(-2px)}
+.spotlight-card:active{transform:scale(.98)}
+.spotlight-Card-current{border-color:var(--pink);box-shadow:0 0 20px rgba(244,156,187,.25)}
+.spotlight-cover{width:68px;height:68px;border-radius:16px;overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:26px;color:#fff;box-shadow:0 8px 18px rgba(0,0,0,.4)}
+.spotlight-info{flex:1;min-width:0}
+.spotlight-badge{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#16121d;background:linear-gradient(90deg,var(--pink),var(--warm));padding:2px 8px;border-radius:8px;margin-bottom:5px}
+.spotlight-title{font-size:15px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spotlight-card.liked .spotlight-title{color:var(--like-color)}
+.spotlight-artist{font-size:12.5px;color:#d0c3e0;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 .playlist{display:grid;gap:8px}
 .track{display:flex;align-items:center;gap:12px;min-width:0;padding:9px 12px;border:1px solid rgba(255,255,255,.04);border-radius:16px;background:var(--panel);cursor:pointer;transition:.2s}
 .track:hover{background:var(--panel-hover)}.track:active{transform:scale(.985)}
@@ -82,12 +111,13 @@ body.is-playing .cover{animation:cb 5s ease-in-out infinite}
 .search-input::placeholder{color:#7c708b}.search-input:focus{border-color:var(--pink);box-shadow:0 0 18px rgba(244,156,187,.18)}
 .search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:none;background:rgba(255,255,255,.08);color:var(--muted);display:none;place-items:center;font-size:13px;padding:0}.search-clear.visible{display:grid}
 
-/* Переключатель вкладок (Треки / Альбомы) в профиле артиста и лайках */
-.sub-tabs-bar{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:4px;margin:18px 0 16px;position:relative;user-select:none}
-.sub-tab-btn{height:38px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:700;border-radius:18px;transition:.25s;display:flex;align-items:center;justify-content:center;gap:6px}
-.sub-tab-btn.active{color:var(--text);background:linear-gradient(135deg,rgba(244,156,187,.22),rgba(179,146,240,.2));border:1px solid rgba(244,156,187,.35);box-shadow:0 4px 14px rgba(0,0,0,.25)}
+/* Переключатель вкладок (Треки / Альбомы) с плавным ползунком */
+.sub-tabs-bar{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:4px;margin:18px 0 16px;position:relative;user-select:none;overflow:hidden}
+.sub-tab-glider{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:18px;background:linear-gradient(135deg,rgba(244,156,187,.22),rgba(179,146,240,.2));border:1px solid rgba(244,156,187,.35);box-shadow:0 4px 14px rgba(0,0,0,.25);transition:transform .36s cubic-bezier(.34,1.56,.64,1);pointer-events:none;z-index:1}
+.sub-tab-btn{position:relative;z-index:2;height:38px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:700;border-radius:18px;transition:color .25s;display:flex;align-items:center;justify-content:center;gap:6px}
+.sub-tab-btn.active{color:var(--text)}
 .sub-tab-count{font-size:11px;padding:1px 7px;border-radius:10px;background:rgba(255,255,255,.08);color:var(--pink)}
-.sub-view-pane{touch-action:pan-y;min-height:180px}
+.sub-view-pane{touch-action:pan-y;min-height:180px;overflow:hidden}
 
 /* Плитки альбомов с гармоничным лайком на обложке */
 .albums-tiles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:18px}
@@ -106,7 +136,7 @@ body.is-playing .cover{animation:cb 5s ease-in-out infinite}
 .album-tile.liked .album-tile-title{color:var(--like-color)}
 .album-tile-meta{font-size:11.5px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* Детальное окно альбома */
+/* Детальное окно альбома с кнопкой Шафл */
 .album-modal-box{width:100%;max-width:390px;max-height:84vh;background:linear-gradient(165deg,#241e30,#15121d);border:1px solid rgba(244,156,187,.28);border-radius:28px;padding:18px 16px 16px;box-shadow:0 24px 60px rgba(0,0,0,.8);display:flex;flex-direction:column;transform:translateY(24px) scale(.94);transition:transform .34s cubic-bezier(.34,1.56,.64,1)}
 .artist-modal-backdrop.open .album-modal-box{transform:translateY(0) scale(1)}
 .album-detail-header{display:flex;gap:14px;align-items:center;text-align:left;margin-bottom:14px}
@@ -117,7 +147,7 @@ body.is-playing .cover{animation:cb 5s ease-in-out infinite}
 .album-detail-artist{font-size:13px;font-weight:600;color:#dfd4ec;margin-top:3px;cursor:pointer}
 .album-detail-artist:hover{color:var(--pink)}
 .album-detail-meta{font-size:11.5px;color:var(--muted);margin-top:4px}
-.album-detail-actions{display:grid;grid-template-columns:1fr auto;gap:10px;margin-bottom:14px}
+.album-detail-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:14px}
 .album-detail-like-btn{width:42px;height:42px;border-radius:21px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--text);display:grid;place-items:center;padding:0;transition:.2s}
 .album-detail-like-btn svg{width:19px;height:19px;fill:transparent;stroke:currentColor;stroke-width:2}
 .album-detail-like-btn.liked{color:var(--like-color);border-color:rgba(255,92,138,.5);background:rgba(255,92,138,.14)}
@@ -251,7 +281,16 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
       </div>
     </section>
     <div class="hint">Свайп влево / вправо — переключить трек<br>Двойной тап по обложке — поставить / убрать лайк</div>
-    <div class="section-heading">СЛУЧАЙНЫЕ ТРЕКИ</div>
+    
+    <!-- Переработанный блок случайного микса на главном экране -->
+    <div class="home-mix-header">
+      <div class="home-mix-title"><span>✦ Волна треков</span></div>
+      <button type="button" class="home-mix-refresh" id="refreshHomeMixBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        <span>Обновить</span>
+      </button>
+    </div>
+    <div id="homeSpotlightSlot"></div>
     <section class="playlist" id="playlist"></section>
   </div>
 
@@ -276,7 +315,7 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
       </div>
     </div>
 
-    <!-- Профиль исполнителя с 2 вкладками и свайпами -->
+    <!-- Профиль исполнителя с анимированными вкладками -->
     <div id="artistProfileView" style="display:none">
       <div class="artist-profile-header">
         <button type="button" class="back-btn" id="closeArtistProfile">← Назад</button>
@@ -289,6 +328,7 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
       </div>
 
       <div class="sub-tabs-bar">
+        <div class="sub-tab-glider" id="artistSubGlider"></div>
         <button type="button" class="sub-tab-btn active" id="artistTabTracksBtn"><span>Треки артиста</span><span class="sub-tab-count" id="artistTracksCount">0</span></button>
         <button type="button" class="sub-tab-btn" id="artistTabAlbumsBtn"><span>Альбомы артиста</span><span class="sub-tab-count" id="artistAlbumsCount">0</span></button>
       </div>
@@ -360,7 +400,7 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
   </div>
 </div>
 
-<!-- Детальное окно альбома (проваливание в альбом) -->
+<!-- Детальное окно альбома с кнопками Слушать, Шафл и Лайк -->
 <div class="artist-modal-backdrop" id="albumModal">
   <div class="album-modal-box">
     <div class="album-detail-header">
@@ -373,7 +413,8 @@ body.is-playing .mini-player.visible{border-color:rgba(244,156,187,.3)}
       </div>
     </div>
     <div class="album-detail-actions">
-      <button type="button" class="profile-btn-primary" id="albumModalPlayBtn">▶ Слушать альбом</button>
+      <button type="button" class="profile-btn-primary" id="albumModalPlayBtn"><span id="albumModalPlayIcon">▶</span><span id="albumModalPlayText">Слушать</span></button>
+      <button type="button" class="profile-btn-secondary" id="albumModalShuffleBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4M4 7h3c5 0 5 10 10 10h3m-4-4 4 4-4 4M4 17h3c1.7 0 2.8-1.6 3.8-3.4M14.2 6.4C15 7.2 15.8 7.5 17 7.5h3"/></svg><span>Шафл</span></button>
       <button type="button" class="album-detail-like-btn" id="albumModalLikeBtn" aria-label="Лайк альбома"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
     </div>
     <div class="playlist" id="albumModalTracks" style="overflow-y:auto;margin-bottom:14px;padding-right:2px;flex:1"></div>
@@ -401,6 +442,11 @@ STORAGE_KEY = "my_music_liked_tracks",
 ALBUM_STORAGE_KEY = "my_music_liked_albums",
 HEART_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 
+// Хранилище обложек (аватарок) исполнителей — сюда бот в ТГ сможет автоматически добавлять фото артистов
+let artistsPhotos = {
+  // Пример: "SALUKI": "https://api.telegram.org/file/bot.../photos/artist_saluki.jpg"
+};
+
 let tracks = [
   {id:"tg_track_4432491077313807598", title:"WILD EA$T", artist:"SALUKI", file:"https://api.telegram.org/file/bot8923549585:AAHjvIKy7UTnXBusEwHmIBatlow0aDORYXU/music/file_30.mp3", cover:"https://api.telegram.org/file/bot8923549585:AAHjvIKy7UTnXBusEwHmIBatlow0aDORYXU/photos/file_28.jpg", gradient:"linear-gradient(135deg, #4b2d54, #c97ba5)", symbol:"✦"},
   {id:"tg_track_7776895991259005262", title:"BBBITCH! (feat. VACÍO & BATO)", artist:"SALUKI, VACÍO, BATO", file:"https://api.telegram.org/file/bot8923549585:AAHjvIKy7UTnXBusEwHmIBatlow0aDORYXU/music/file_29.mp3", cover:"https://api.telegram.org/file/bot8923549585:AAHjvIKy7UTnXBusEwHmIBatlow0aDORYXU/photos/file_28.jpg", gradient:"linear-gradient(135deg, #4b2d54, #c97ba5)", symbol:"✦"},
@@ -416,8 +462,8 @@ tabOrder = {search:0,home:1,likes:2}, navButtons = document.querySelectorAll(".n
 let activeTabName = "home", currentIndex = 0, isSeeking = false, shuffleEnabled = false,
 activeQueueSource = "all", activeQueueArtist = null, activeQueueAlbum = null, shufflePlayedInRound = [0], playbackHistory = [],
 currentArtistProfile = null, currentOpenAlbumId = null, likedOrder = [], likedAlbums = [], albumsList = [], carouselAnimId = null, topOffset = 0, bottomOffset = 0,
-artistSubTab = "tracks", // "tracks" или "albums" в карточке артиста
-likesSubTab = "tracks";  // "tracks" или "albums" в моих лайках
+artistSubTab = "tracks",
+likesSubTab = "tracks";
 
 try {
   const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -432,12 +478,19 @@ isTrackLiked = i => Boolean(tracks[i] && likedOrder.includes(tracks[i].id)),
 getLikedIndices = () => likedOrder.map(id => tracks.findIndex(t => t.id === id)).filter(i => i !== -1),
 shuffleArray = a => { const c = [...a]; for (let i = c.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [c[i], c[j]] = [c[j], c[i]]; } return c; },
 
-// Парсинг всех артистов трека через запятую
 parseArtists = artistStr => (artistStr || "").split(",").map(s => s.trim()).filter(Boolean),
-// Первый (главный) артист для привязки альбома
 getMainArtist = artistStr => parseArtists(artistStr)[0] || artistStr || "Неизвестен",
 
-// Треки артиста: попадают ВСЕ треки, где артист указан (первым или через запятую на фите)
+// Поиск обложки артиста в словаре artistsPhotos (без учета регистра)
+getArtistPhotoUrl = name => {
+  if (!name) return "";
+  const lower = name.trim().toLowerCase();
+  for (const [k, v] of Object.entries(artistsPhotos)) {
+    if (k.trim().toLowerCase() === lower && v) return v;
+  }
+  return "";
+},
+
 getArtistTrackIndices = name => {
   if (!name) return [];
   const target = name.trim().toLowerCase();
@@ -454,7 +507,7 @@ getActiveQueueIndices = () => {
   return tracks.map((_, i) => i);
 };
 
-// Формирование альбомов по обложке. Альбом привязывается ТОЛЬКО к первому исполнителю!
+// Сбор альбомов: группировка по обложке, привязка строго к ПЕРВОМУ исполнителю
 function buildAlbums() {
   albumsList = [];
   if (!tracks.length) return;
@@ -466,7 +519,7 @@ function buildAlbums() {
   });
 
   let albumCounter = 1;
-  groups.forEach((group, key) => {
+  groups.forEach((group) => {
     if (!group.length) return;
     const firstTrack = group[0].track;
     const mainArt = getMainArtist(firstTrack.artist);
@@ -474,7 +527,7 @@ function buildAlbums() {
     albumsList.push({
       id: "album_" + albumCounter++,
       title: albTitle,
-      artist: mainArt, // строго первый артист
+      artist: mainArt,
       cover: firstTrack.cover,
       gradient: firstTrack.gradient || "linear-gradient(135deg, #4b2d54, #c97ba5)",
       symbol: firstTrack.symbol || "✦",
@@ -483,9 +536,13 @@ function buildAlbums() {
   });
 }
 
-// Собираем всех уникальных артистов (включая тех, кто указан после запятой) без дублей
+// Сбор всех уникальных артистов с подстановкой их обложек из artistsPhotos
 function getAllArtists() {
   const map = new Map();
+  Object.keys(artistsPhotos).forEach(a => {
+    const clean = a.trim();
+    if (clean) map.set(clean.toLowerCase(), clean);
+  });
   tracks.forEach(t => {
     parseArtists(t.artist).forEach(a => {
       const key = a.toLowerCase();
@@ -503,8 +560,21 @@ function getAllArtists() {
   return list.map((name, idx) => ({
     name,
     gradient: gradients[idx % gradients.length],
-    photo: ""
+    photo: getArtistPhotoUrl(name)
   }));
+}
+
+// Универсальный рендер аватарки артиста (с фоллбэком на инициалы, если фото еще нет или не загрузилось)
+function fillArtistAvatar(el, artistObj) {
+  const initials = artistObj.name.slice(0, 2).toUpperCase();
+  el.style.background = artistObj.gradient;
+  if (artistObj.photo) {
+    el.innerHTML = `<img src="${artistObj.photo}" alt="">`;
+    const img = el.querySelector("img");
+    if (img) img.onerror = () => { el.textContent = initials; };
+  } else {
+    el.textContent = initials;
+  }
 }
 
 function toggleLike(i, burst = false, boxId = "heartsContainer") {
@@ -529,7 +599,6 @@ function toggleAlbumLike(albumId) {
   }
   saveAlbumLikes();
 
-  // Мгновенно обновляем все кнопки лайка этого альбома на странице
   document.querySelectorAll(`.album-tile[data-album-id="${albumId}"]`).forEach(tile => {
     tile.classList.toggle("liked", nowLiked);
     tile.querySelector(".album-tile-like")?.classList.toggle("liked", nowLiked);
@@ -541,7 +610,6 @@ function toggleAlbumLike(albumId) {
   refreshUI();
 }
 
-// Создание красивой плитки альбома
 function createAlbumTileElement(al) {
   const isLiked = likedAlbums.includes(al.id);
   const tile = document.createElement("div");
@@ -595,11 +663,34 @@ function refreshUI() {
     r.querySelector(".track-like")?.classList.toggle("liked", l);
     const pb = r.querySelector(".track-play"); if (pb) pb.textContent = isCur && playing ? "Ⅱ" : "▶";
   });
+
+  // Обновление карточки «Находка дня» на главной
+  const spot = document.querySelector(".spotlight-card[data-index]");
+  if (spot) {
+    const sIdx = +spot.dataset.index, isCur = sIdx === currentIndex, l = isTrackLiked(sIdx);
+    spot.classList.toggle("spotlight-Card-current", isCur);
+    spot.classList.toggle("liked", l);
+    spot.querySelector(".track-like")?.classList.toggle("liked", l);
+    const spb = spot.querySelector(".track-play"); if (spb) spb.textContent = isCur && playing ? "Ⅱ" : "▶";
+  }
+
   document.querySelectorAll(".mini-cover-title[data-index]").forEach(el => el.classList.toggle("liked", isTrackLiked(+el.dataset.index)));
 
   if (currentArtistProfile) {
     const act = getArtistTrackIndices(currentArtistProfile).includes(currentIndex) && playing;
     if ($("profilePlayIcon")) { $("profilePlayIcon").textContent = act ? "Ⅱ" : "▶"; $("profilePlayText").textContent = act ? "Пауза" : "Слушать"; }
+  }
+
+  if (currentOpenAlbumId) {
+    const al = albumsList.find(x => x.id === currentOpenAlbumId);
+    if (al) {
+      const albAct = al.tracks.includes(currentIndex) && playing;
+      if ($("albumModalPlayIcon")) {
+        $("albumModalPlayIcon").textContent = albAct ? "Ⅱ" : "▶";
+        $("albumModalPlayText").textContent = albAct ? "Пауза" : "Слушать";
+      }
+      $("albumModalShuffleBtn")?.classList.toggle("active", shuffleEnabled && activeQueueSource === "album" && activeQueueAlbum === al.id);
+    }
   }
 }
 
@@ -626,16 +717,28 @@ navButtons.forEach(b => b.onclick = () => {
   switchTab(b.dataset.tab, false);
 });
 
-// Переключение вкладок внутри Профиля Артиста (1 - Треки артиста, 2 - Альбомы артиста)
-function setArtistSubTab(sub) {
+// Анимированное переключение вкладок внутри Профиля Артиста
+function setArtistSubTab(sub, animate = true) {
+  if (artistSubTab === sub && animate) return;
+  const animClass = sub === "albums" ? "sub-slide-right" : "sub-slide-left";
   artistSubTab = sub;
   $("artistTabTracksBtn").classList.toggle("active", sub === "tracks");
   $("artistTabAlbumsBtn").classList.toggle("active", sub === "albums");
-  $("artistTracksPane").style.display = sub === "tracks" ? "block" : "none";
-  $("artistAlbumsPane").style.display = sub === "albums" ? "block" : "none";
+  if ($("artistSubGlider")) $("artistSubGlider").style.transform = sub === "albums" ? "translateX(100%)" : "translateX(0%)";
+
+  const tPane = $("artistTracksPane"), aPane = $("artistAlbumsPane");
+  tPane.style.display = sub === "tracks" ? "block" : "none";
+  aPane.style.display = sub === "albums" ? "block" : "none";
+
+  if (animate) {
+    const targetPane = sub === "tracks" ? tPane : aPane;
+    targetPane.classList.remove("sub-slide-right", "sub-slide-left");
+    void targetPane.offsetWidth;
+    targetPane.classList.add(animClass);
+  }
 }
-$("artistTabTracksBtn").onclick = () => setArtistSubTab("tracks");
-$("artistTabAlbumsBtn").onclick = () => setArtistSubTab("albums");
+$("artistTabTracksBtn").onclick = () => setArtistSubTab("tracks", true);
+$("artistTabAlbumsBtn").onclick = () => setArtistSubTab("albums", true);
 
 function buildMiniCoverCard(i) {
   const t = tracks[i], c = document.createElement("div"); c.className = "mini-cover-card"; c.style.background = t.gradient;
@@ -680,7 +783,8 @@ function renderArtistsGrid() {
   }
   shuffleArray(artists).slice(0, 3).forEach(a => {
     const c = document.createElement("div"); c.className = "artist-card";
-    c.innerHTML = `<div class="artist-avatar" style="background:${a.gradient}">${a.photo ? `<img src="${a.photo}" alt="">` : a.name.slice(0, 2).toUpperCase()}</div><div class="artist-card-name">${a.name}</div>`;
+    c.innerHTML = `<div class="artist-avatar"></div><div class="artist-card-name">${a.name}</div>`;
+    fillArtistAvatar(c.querySelector(".artist-avatar"), a);
     c.onclick = () => openArtistProfile(a.name);
     grid.appendChild(c);
   });
@@ -692,18 +796,16 @@ function openArtistProfile(name) {
   $("fullPlayer").classList.remove("open");
 
   const artists = getAllArtists();
-  const a = artists.find(x => x.name.toLowerCase() === name.trim().toLowerCase()) || {name: name.trim(), gradient:"linear-gradient(135deg,var(--pink),var(--purple))", photo:""};
+  const a = artists.find(x => x.name.toLowerCase() === name.trim().toLowerCase()) || {name: name.trim(), gradient:"linear-gradient(135deg,var(--pink),var(--purple))", photo: getArtistPhotoUrl(name)};
   currentArtistProfile = a.name;
 
   if (activeTabName !== "search") switchTab("search", true);
   $("searchMainContent").style.display = "none";
   $("artistProfileView").style.display = "block";
 
-  $("profileAvatar").style.background = a.gradient;
-  $("profileAvatar").innerHTML = a.photo ? `<img src="${a.photo}" alt="">` : a.name.slice(0, 2).toUpperCase();
+  fillArtistAvatar($("profileAvatar"), a);
   $("profileName").textContent = a.name;
 
-  // 1. Все треки артиста (включая треки, где он через запятую)
   const trackIndices = getArtistTrackIndices(a.name);
   $("artistTracksCount").textContent = trackIndices.length;
   $("artistProfileTracks").innerHTML = "";
@@ -713,7 +815,6 @@ function openArtistProfile(name) {
     $("artistProfileTracks").innerHTML = `<div style="text-align:center;color:var(--muted);padding:20px">Треков пока нет</div>`;
   }
 
-  // 2. Альбомы артиста (ТОЛЬКО те, где он первый главный артист!)
   const artistAlbums = albumsList.filter(al => al.artist.toLowerCase() === a.name.toLowerCase());
   $("artistAlbumsCount").textContent = artistAlbums.length;
   const albGrid = $("artistProfileAlbumsGrid"); albGrid.innerHTML = "";
@@ -723,12 +824,12 @@ function openArtistProfile(name) {
     albGrid.innerHTML = `<div style="grid-column:span 2;text-align:center;color:var(--muted);padding:28px 12px">У исполнителя нет сольных альбомов</div>`;
   }
 
-  setArtistSubTab("tracks");
+  setArtistSubTab("tracks", false);
   refreshUI();
   window.scrollTo({top: 0, behavior: "smooth"});
 }
 
-// Проваливание в альбом: треки, хронометраж, исполнитель
+// Проваливание в альбом (Слушать, Шафл альбома, Лайк альбома)
 function openAlbumModal(al) {
   currentOpenAlbumId = al.id;
   const cov = $("albumModalCover");
@@ -748,14 +849,33 @@ function openAlbumModal(al) {
   likeBtn.classList.toggle("liked", likedAlbums.includes(al.id));
   likeBtn.onclick = () => toggleAlbumLike(al.id);
 
+  // Обычный запуск альбома по порядку
   $("albumModalPlayBtn").onclick = () => {
     if (!al.tracks.length) return;
     setQueueContext("album", null, al.id);
-    playTrack(al.tracks[0], {manualSelect: true});
+    if (al.tracks.includes(currentIndex)) {
+      playTrack(currentIndex, {manualSelect: false});
+    } else {
+      shuffleEnabled = false;
+      playTrack(al.tracks[0], {manualSelect: true});
+    }
+  };
+
+  // Шафл непосредственно треков этого альбома
+  $("albumModalShuffleBtn").onclick = () => {
+    if (!al.tracks.length) return;
+    setQueueContext("album", null, al.id);
+    shuffleEnabled = true;
+    let opts = al.tracks.filter(i => i !== currentIndex);
+    if (!opts.length) opts = al.tracks;
+    const pick = opts[Math.floor(Math.random() * opts.length)];
+    shufflePlayedInRound = [pick];
+    playTrack(pick, {manualSelect: true, forceSwitch: true, slideDirection: "next"});
   };
 
   const list = $("albumModalTracks"); list.innerHTML = "";
   al.tracks.forEach((tIdx, i) => list.appendChild(createTrackRowElement(tracks[tIdx], tIdx, i + 1, "album", null, al.id)));
+  refreshUI();
   $("albumModal").classList.add("open");
 }
 $("albumModalClose").onclick = () => $("albumModal").classList.remove("open");
@@ -776,9 +896,10 @@ function handleArtistClick() {
     const box = $("artistModalList"); box.innerHTML = "";
     list.forEach(name => {
       const artists = getAllArtists();
-      const a = artists.find(x => x.name.toLowerCase() === name.toLowerCase()) || {name, gradient:"linear-gradient(135deg,var(--pink),var(--purple))", photo:""};
+      const a = artists.find(x => x.name.toLowerCase() === name.toLowerCase()) || {name, gradient:"linear-gradient(135deg,var(--pink),var(--purple))", photo: getArtistPhotoUrl(name)};
       const btn = document.createElement("button"); btn.type = "button"; btn.className = "artist-modal-item";
-      btn.innerHTML = `<div class="artist-modal-ava" style="background:${a.gradient}">${a.photo ? `<img src="${a.photo}" alt="">` : a.name.slice(0, 2).toUpperCase()}</div><span class="artist-modal-name">${a.name}</span><span class="artist-modal-arrow">→</span>`;
+      btn.innerHTML = `<div class="artist-modal-ava"></div><span class="artist-modal-name">${a.name}</span><span class="artist-modal-arrow">→</span>`;
+      fillArtistAvatar(btn.querySelector(".artist-modal-ava"), a);
       btn.onclick = () => openArtistProfile(a.name); box.appendChild(btn);
     });
     $("artistModal").classList.add("open");
@@ -811,7 +932,8 @@ function handleSearchQuery() {
   $("searchArtistsSection").style.display = ma.length ? "block" : "none";
   $("searchArtistsGrid").innerHTML = ""; ma.forEach(a => {
     const c = document.createElement("div"); c.className = "artist-card";
-    c.innerHTML = `<div class="artist-avatar" style="background:${a.gradient}">${a.photo ? `<img src="${a.photo}" alt="">` : a.name.slice(0, 2).toUpperCase()}</div><div class="artist-card-name">${a.name}</div>`;
+    c.innerHTML = `<div class="artist-avatar"></div><div class="artist-card-name">${a.name}</div>`;
+    fillArtistAvatar(c.querySelector(".artist-avatar"), a);
     c.onclick = () => openArtistProfile(a.name); $("searchArtistsGrid").appendChild(c);
   });
   const mt = tracks.map((t, i) => ({t, i})).filter(({t}) => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
@@ -821,7 +943,6 @@ function handleSearchQuery() {
 $("searchInput").oninput = handleSearchQuery;
 $("searchClear").onclick = () => { $("searchInput").value = ""; handleSearchQuery(); $("searchInput").focus(); };
 
-// Вкладка «Мои лайки» с переключателем: 1 - Мои треки, 2 - Мои альбомы
 function renderLikesTab() {
   const area = $("likesContentArea"), liked = getLikedIndices(); area.innerHTML = "";
   const likedAlbObjs = albumsList.filter(al => likedAlbums.includes(al.id));
@@ -857,6 +978,7 @@ function renderLikesTab() {
     </div>
 
     <div class="sub-tabs-bar">
+      <div class="sub-tab-glider" id="likesSubGlider" style="transform:translateX(${likesSubTab === 'albums' ? '100%' : '0%'})"></div>
       <button type="button" class="sub-tab-btn ${likesSubTab === 'tracks' ? 'active' : ''}" id="likesTabTracksBtn"><span>Мои треки</span><span class="sub-tab-count">${liked.length}</span></button>
       <button type="button" class="sub-tab-btn ${likesSubTab === 'albums' ? 'active' : ''}" id="likesTabAlbumsBtn"><span>Мои альбомы</span><span class="sub-tab-count">${likedAlbObjs.length}</span></button>
     </div>
@@ -883,8 +1005,8 @@ function renderLikesTab() {
     albCont.innerHTML = `<div style="grid-column:span 2;text-align:center;color:var(--muted);padding:24px">У вас пока нет лайкнутых альбомов</div>`;
   }
 
-  $("likesTabTracksBtn").onclick = () => setLikesSubTab("tracks");
-  $("likesTabAlbumsBtn").onclick = () => setLikesSubTab("albums");
+  $("likesTabTracksBtn").onclick = () => setLikesSubTab("tracks", true);
+  $("likesTabAlbumsBtn").onclick = () => setLikesSubTab("albums", true);
 
   $("playLikedOrderBtn").onclick = () => {
     if (!liked.length) return;
@@ -899,13 +1021,71 @@ function renderLikesTab() {
   };
 }
 
-function setLikesSubTab(sub) {
+function setLikesSubTab(sub, animate = true) {
+  if (likesSubTab === sub && animate) return;
+  const animClass = sub === "albums" ? "sub-slide-right" : "sub-slide-left";
   likesSubTab = sub;
   $("likesTabTracksBtn")?.classList.toggle("active", sub === "tracks");
   $("likesTabAlbumsBtn")?.classList.toggle("active", sub === "albums");
-  if ($("likesTracksPane")) $("likesTracksPane").style.display = sub === "tracks" ? "block" : "none";
-  if ($("likesAlbumsPane")) $("likesAlbumsPane").style.display = sub === "albums" ? "block" : "none";
+  if ($("likesSubGlider")) $("likesSubGlider").style.transform = sub === "albums" ? "translateX(100%)" : "translateX(0%)";
+
+  const tPane = $("likesTracksPane"), aPane = $("likesAlbumsPane");
+  if (tPane) tPane.style.display = sub === "tracks" ? "block" : "none";
+  if (aPane) aPane.style.display = sub === "albums" ? "block" : "none";
+
+  if (animate) {
+    const targetPane = sub === "tracks" ? tPane : aPane;
+    if (targetPane) {
+      targetPane.classList.remove("sub-slide-right", "sub-slide-left");
+      void targetPane.offsetWidth;
+      targetPane.classList.add(animClass);
+    }
+  }
 }
+
+// Рендер обновленного микса на Главном экране (Находка дня + список с кнопкой Обновить)
+function renderHomeRandomMix(animate = false) {
+  const pl = $("playlist"), spotSlot = $("homeSpotlightSlot");
+  pl.innerHTML = ""; spotSlot.innerHTML = "";
+  if (!tracks.length) {
+    pl.innerHTML = `<div style="text-align:center; color:var(--muted); padding: 20px;">Пока нет треков. Загрузите их через Telegram-бота!</div>`;
+    return;
+  }
+  const randomIndices = shuffleArray(tracks.map((_, i) => i)).slice(0, 10);
+  const firstIdx = randomIndices[0], ft = tracks[firstIdx];
+  const playing = firstIdx === currentIndex && !audio.paused && !audio.ended, liked = isTrackLiked(firstIdx);
+
+  const spot = document.createElement("div");
+  spot.className = `spotlight-card${firstIdx === currentIndex ? " spotlight-Card-current" : ""}${liked ? " liked" : ""}${animate ? " sub-slide-right" : ""}`;
+  spot.dataset.index = firstIdx;
+  spot.innerHTML = `
+    <div class="spotlight-cover" style="background:${ft.gradient}">${ft.cover ? `<img src="${ft.cover}" alt="">` : (ft.symbol || "♫")}</div>
+    <div class="spotlight-info">
+      <span class="spotlight-badge">✦ Трек момента</span>
+      <div class="spotlight-title">${ft.title}</div>
+      <div class="spotlight-artist">${ft.artist}</div>
+    </div>
+    <button type="button" class="track-like${liked ? " liked" : ""}">${HEART_SVG}</button>
+    <div class="track-play">${playing ? "Ⅱ" : "▶"}</div>
+  `;
+  const sImg = spot.querySelector("img");
+  if (sImg) sImg.onerror = () => { sImg.parentElement.textContent = ft.symbol || "♫"; };
+  spot.querySelector(".track-like").onclick = e => { e.stopPropagation(); toggleLike(firstIdx, false); };
+  spot.onclick = () => { setQueueContext("all"); playTrack(firstIdx, {manualSelect: true}); };
+  spotSlot.appendChild(spot);
+
+  randomIndices.slice(1).forEach((idx, num) => {
+    const row = createTrackRowElement(tracks[idx], idx, num + 1, "all");
+    if (animate) row.classList.add("sub-slide-right");
+    pl.appendChild(row);
+  });
+}
+
+$("refreshHomeMixBtn").onclick = () => {
+  const btn = $("refreshHomeMixBtn");
+  btn.classList.remove("spin"); void btn.offsetWidth; btn.classList.add("spin");
+  renderHomeRandomMix(true);
+};
 
 function spawnHearts(boxId = "heartsContainer") {
   const box = $(boxId); if (!box) return;
@@ -1057,7 +1237,6 @@ function bindSwipe(el, ignoreSel, onSwipe) {
   window.addEventListener("mouseup", e => { if (down) { down = false; check(e.clientX - sx, e.clientY - sy); } });
 }
 
-// Свайп влево/вправо для переключения подвкладок (Треки <-> Альбомы) в профиле артиста и лайках
 function bindSubTabSwipe(el, onLeft, onRight) {
   let sx = 0, sy = 0;
   el.addEventListener("touchstart", e => {
@@ -1074,8 +1253,8 @@ function bindSubTabSwipe(el, onLeft, onRight) {
   }, {passive: true});
 }
 
-bindSubTabSwipe($("artistProfileView"), () => setArtistSubTab("albums"), () => setArtistSubTab("tracks"));
-bindSubTabSwipe($("viewLikes"), () => setLikesSubTab("albums"), () => setLikesSubTab("tracks"));
+bindSubTabSwipe($("artistProfileView"), () => setArtistSubTab("albums", true), () => setArtistSubTab("tracks", true));
+bindSubTabSwipe($("viewLikes"), () => setLikesSubTab("albums", true), () => setLikesSubTab("tracks", true));
 
 let miniSwiped = false;
 bindSwipe($("swipeArea"), ".controls");
@@ -1085,14 +1264,7 @@ $("miniTrackSlider").onclick = () => { if (miniSwiped) { miniSwiped = false; ret
 
 function initApp() {
   buildAlbums();
-  const pl = $("playlist"); pl.innerHTML = "";
-  if (!tracks.length) {
-    pl.innerHTML = `<div style="text-align:center; color:var(--muted); padding: 20px;">Пока нет треков. Загрузите их через Telegram-бота!</div>`;
-    return;
-  }
-  const randomIndices = shuffleArray(tracks.map((_, i) => i)).slice(0, 10);
-  randomIndices.forEach((idx, num) => pl.appendChild(createTrackRowElement(tracks[idx], idx, num + 1, "all")));
-  
+  renderHomeRandomMix(false);
   if (tracks.length > 0) {
     audio.src = tracks[0].file;
     updateTrackInfo();
